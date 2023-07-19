@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "https://github.com/danhtran94/tix",
   "author": "danhtran94",
-  "license": "GNU Affero General Public License v3.0"
+  "license": "GNU Affero General Public License v3.0",
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "react": "^18.2.0",
+    "typescript": "^5.1.6"
+  },
+  "packageManager": "yarn@3.6.1"
 }

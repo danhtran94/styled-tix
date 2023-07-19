@@ -8,7 +8,10 @@
     <img alt="Types included" src="https://badgen.net/npm/types/styled-tix" />
   </a>
   <a href="https://bundlephobia.com/result?p=styled-tix">
-    <img alt="Bundle minzip size" src="https://img.shields.io/bundlephobia/minzip/styled-tix" />
+    <img alt="Bundle minzip size" src="https://badgen.net/bundlephobia/minzip/styled-tix" />
+  </a>
+  <a href="https://bundlephobia.com/result?p=styled-tix">
+    <img alt="Bundle dependency count" src="https://badgen.net/bundlephobia/dependency-count/styled-tix" />
   </a>
   <a href="https://github.com/danhtran94/styled-tix/blob/main/LICENSE">
     <img alt="License" src="https://badgen.net/github/license/danhtran94/styled-tix" />

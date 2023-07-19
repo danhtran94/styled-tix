@@ -15,7 +15,7 @@ export default [
         file: packageJson.main,
         format: "cjs",
         sourcemap: true,
-        name: "tix",
+        name: "styled-tix",
       },
       {
         file: packageJson.module,

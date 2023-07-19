@@ -1560,6 +1560,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"styled-tix@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "styled-tix@workspace:."
+  dependencies:
+    "@rollup/plugin-commonjs": ^20.0.0
+    "@rollup/plugin-node-resolve": ^13.0.4
+    "@rollup/plugin-typescript": ^8.2.5
+    "@types/react": ^18.2.15
+    react: ^18.2.0
+    rollup: ^2.56.2
+    rollup-plugin-dts: ^3.0.2
+    rollup-plugin-peer-deps-external: ^2.2.4
+    rollup-plugin-terser: ^7.0.2
+    tslib: ^2.6.0
+    typescript: ^5.1.6
+  peerDependencies:
+    react: ^18.2.0
+  languageName: unknown
+  linkType: soft
+
 "supports-color@npm:^5.3.0":
   version: 5.5.0
   resolution: "supports-color@npm:5.5.0"
@@ -1612,27 +1632,6 @@ __metadata:
   checksum: 18657b2a282238a1ca9c825efa966f4dd043a33196b2f8a7a2cba406a2006e14f55295b9d9cf6380a18599b697e9579e4092c99b9f40c7871ceec01cc98e3606
   languageName: node
   linkType: hard
-
-"tix@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "tix@workspace:."
-  dependencies:
-    "@rollup/plugin-commonjs": ^20.0.0
-    "@rollup/plugin-node-resolve": ^13.0.4
-    "@rollup/plugin-typescript": ^8.2.5
-    "@types/react": ^18.2.15
-    react: ^18.2.0
-    rollup: ^2.56.2
-    rollup-plugin-dts: ^3.0.2
-    rollup-plugin-peer-deps-external: ^2.2.4
-    rollup-plugin-terser: ^7.0.2
-    tslib: ^2.6.0
-    typescript: ^5.1.6
-  peerDependencies:
-    react: ^18.2.0
-    typescript: ^5.1.6
-  languageName: unknown
-  linkType: soft
 
 "tslib@npm:^2.6.0":
   version: 2.6.0

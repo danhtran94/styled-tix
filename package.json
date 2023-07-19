@@ -1,0 +1,9 @@
+{
+  "name": "tix",
+  "version": "2.5.2",
+  "description": "Styles your React components with TailwindCSS classes, define variant properties without fighting huge & long classnames.",
+  "main": "index.js",
+  "repository": "https://github.com/danhtran94/tix",
+  "author": "danhtran94",
+  "license": "GNU Affero General Public License v3.0"
+}

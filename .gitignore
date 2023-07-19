@@ -1,4 +1,9 @@
 .yarn/*
 !.yarn/releases
 
+.rollup.cache
 node_modules
+
+tsconfig.tsbuildinfo
+
+dist

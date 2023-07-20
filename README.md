@@ -9,6 +9,10 @@ Styles your React components with TailwindCSS classes, and define variant proper
 
 ## Preview Simple Usecase
 This is simple sample for **`styles button html tag`**. `tix` can do more complex cases than below.
+
+Playground click below: \
+[![npm](https://img.shields.io/badge/Codesandbox-000000?style=for-the-badge&logo=CodeSandbox&logoColor=white)](https://codesandbox.io/p/sandbox/styled-tix-sample-3789lk)
+
 ```jsx
 /**
  * First, create our Button Component with tix.

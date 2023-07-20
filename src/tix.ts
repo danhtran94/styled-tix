@@ -1,22 +1,16 @@
 import { createElement, forwardRef } from "react";
-import { PolymorphicTixProps, Tix, VariantProps, Variants } from "./types";
+import {
+  PolymorphicTixProps,
+  Tix,
+  TixRender,
+  VariantProps,
+  Variants,
+} from "./types";
 import { omit, createTixClassName, parseIncomingClass } from "./utils";
 
 export const newTix = (classesMixer: (classes: string[]) => string): Tix => {
-  return (config, El, render) => {
-    config.variants = config.variants
-      ? config.variants
-      : ({} as (typeof config)["variants"]);
-
-    const defaultRender: typeof render = (styled) => (props, ref) => {
-      const [El, restProps] = styled(props);
-      return createElement(El, { ...restProps, ref });
-    };
-
-    const {
-      variants = {} as Variants<{}>,
-      defaults = {} as VariantProps<Variants<{}>>,
-    } = config;
+  return (config, El, render = defaultRender) => {
+    const { variants = {}, defaults = {} } = config;
 
     const { tixClassName, tixComponentName } = createTixClassName(
       El,
@@ -60,15 +54,11 @@ export const newTix = (classesMixer: (classes: string[]) => string): Tix => {
       ] as any;
     };
 
-    const RefComponent = forwardRef(
-      render ? render(styled) : defaultRender(styled)
-    );
+    const RefComponent = forwardRef(render(styled));
     RefComponent.displayName = tixComponentName;
+    (RefComponent as any).variants = variants;
 
-    return {
-      ...(RefComponent as any),
-      variants: config.variants!,
-    };
+    return RefComponent as any;
   };
 };
 
@@ -122,6 +112,11 @@ const getVariantKeysAndProps = (
       };
     }, {}) as VariantProps<Variants<{}>>,
   };
+};
+
+const defaultRender: TixRender<any, any> = (styled) => (props, ref) => {
+  const [El, restProps] = styled(props);
+  return createElement(El, { ...restProps, ref });
 };
 
 // Helpers

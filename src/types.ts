@@ -38,7 +38,7 @@ export type VariantProps<V extends Variants<V>> = {
     : any;
 };
 
-interface TixRender<
+export interface TixRender<
   E extends ElementType,
   V extends Variants<V>,
   CustomProps = {}

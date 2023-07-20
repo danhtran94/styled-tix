@@ -4,13 +4,13 @@ import {
   ElementType,
   ForwardRefExoticComponent,
   PropsWithChildren,
-  ReactNode,
+  ReactElement,
 } from "react";
 
 type TixConfig<V extends Variants<V>> = {
   name?: string;
   base?: string;
-  variants?: V;
+  variants: V;
   defaults?: VariantProps<V>;
 };
 
@@ -58,7 +58,7 @@ export interface TixRender<
       VariantProps<V> &
       Omit<PolymorphicTixProps<E, CustomProps>, "ref">,
     ref: PolymorphicRef<E>
-  ) => ReactNode;
+  ) => ReactElement;
 }
 
 export interface Tix<CustomProps = {}> {
@@ -78,7 +78,7 @@ interface PolymorphicTixComponentWithVariants<
   > {
   <C extends ElementType = E>(
     props: CustomProps & VariantProps<V> & PolymorphicTixProps<C, CustomProps>
-  ): ReactNode;
+  ): ReactElement;
   readonly variants: V;
 }
 

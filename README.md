@@ -9,7 +9,7 @@ Styles your React components with TailwindCSS classes, and define variant proper
 
 ## Preview Simple Usecase
 This is simple sample for **`styles button html tag`**. `tix` can do more complex cases than below.
-```typescriptreact
+```jsx
 /**
  * First, create our Button Component with tix.
  * file: TixButton.tsx

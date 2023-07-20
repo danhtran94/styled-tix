@@ -56,9 +56,8 @@ export const newTix = (classesMixer: (classes: string[]) => string): Tix => {
 
     const RefComponent = forwardRef(render(styled));
     RefComponent.displayName = tixComponentName;
-    (RefComponent as any).variants = variants;
 
-    return RefComponent as any;
+    return { ...RefComponent, variants } as any;
   };
 };
 

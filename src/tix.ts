@@ -10,7 +10,7 @@ import { omit, createTixClassName, parseIncomingClass } from "./utils";
 
 export const newTix = (classesMixer: (classes: string[]) => string): Tix => {
   return (config, El, render = defaultRender) => {
-    const { variants = {}, defaults = {} } = config;
+    const { base = "", variants = {}, defaults = {} } = config;
 
     const { tixClassName, tixComponentName } = createTixClassName(
       El,
@@ -46,7 +46,7 @@ export const newTix = (classesMixer: (classes: string[]) => string): Tix => {
           className: classesMixer([
             tixClassName,
             ...upperTixClassNames,
-            config.base || "",
+            base,
             ...variantClassNames,
             ...upperClassNames,
           ]),

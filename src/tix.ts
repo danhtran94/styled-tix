@@ -35,12 +35,8 @@ export const newTix = (classesMixer: (classes: string[]) => string): Tix => {
         upperTixClassNames
       );
 
-      if (props.as) {
-        El = props.as;
-      }
-
       return [
-        El,
+        props.as || El,
         {
           ...omit(props, variantKeys.concat(["as"])),
           className: classesMixer(

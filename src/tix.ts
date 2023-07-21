@@ -69,31 +69,26 @@ const computeVariantClassNames = (
   variantProps: VariantProps<Variants<{}>>,
   parentNames: string[]
 ) => {
+  const variantPropKeys = Object.keys(variantProps);
   return variantKeys
+    .filter((k) => variantPropKeys.includes(k))
     .map((k) => {
-      if (Object.keys(variantProps).includes(k)) {
-        const variant = variants[k];
+      const variant = variants[k];
+      const variantVal = variantProps[k];
 
-        if (typeof variant === "string") {
-          if (variantProps[k]) {
-            return variant;
-          } else {
-            return "";
-          }
-        }
-
-        if (typeof variant === "object") {
-          return variant[variantProps[k]];
-        }
-
-        return variantProps[k]
-          ? variant(variantProps[k], (_TixEl: any) => variantProps, parentNames)
-          : "";
+      if (typeof variant === "string") {
+        return variantVal ? variant : "";
       }
 
-      return "";
+      if (typeof variant === "object") {
+        return variant[variantVal];
+      }
+
+      return variantVal !== undefined
+        ? variant(variantVal, (_TixEl: any) => variantProps, parentNames)
+        : "";
     })
-    .filter((c) => c !== "");
+    .filter((c) => c!!);
 };
 
 const getVariantKeysAndProps = (
@@ -105,11 +100,15 @@ const getVariantKeysAndProps = (
   return {
     variantKeys,
     variantProps: variantKeys.reduce((vprops, key) => {
+      if (props[key] === undefined && defaults[key] === undefined) {
+        return vprops;
+      }
+
       return {
         ...vprops,
         [key]: props[key] !== undefined ? props[key] : defaults[key],
       };
-    }, {}) as VariantProps<Variants<{}>>,
+    }, {} as VariantProps<Variants<{}>>),
   };
 };
 

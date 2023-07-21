@@ -43,13 +43,13 @@ export const newTix = (classesMixer: (classes: string[]) => string): Tix => {
         El,
         {
           ...omit(props, variantKeys.concat(["as"])),
-          className: classesMixer([
-            tixClassName,
-            ...upperTixClassNames,
-            base,
-            ...variantClassNames,
-            ...upperClassNames,
-          ]),
+          className: classesMixer(
+            [tixClassName]
+              .concat(upperTixClassNames)
+              .concat(base)
+              .concat(variantClassNames)
+              .concat(upperClassNames)
+          ),
         },
       ] as any;
     };

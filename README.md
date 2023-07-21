@@ -84,6 +84,73 @@ const App: FC = () => {
 }
 ```
 
+## Features
+
+**Extends Component & Custom Props**
+```jsx
+/**
+ * First, create our extended TixButton with User's Props.
+ * file: TixButtonCustomProps.tsx
+ */
+import { useState, useEffect } from "react";
+import { tix, withProps, tw } from "./tix"; // Please read the document `Configuration`
+import { TixButton } from "./TixButton";
+
+// Define CustomProps type
+interface CustomProps {
+  initCount: number;
+  onChangeCount: (val: number) => void;
+}
+
+// Declare CustomProps using `withProps` helper
+export const TixButtonCustomProps = withProps<CustomProps>(tix)(
+  {
+    name: "ButtonCustomProps",
+    base: tw`text-base font-bold border rounded inline-flex items-center px-8 py-3 mb-2`,
+    variants: {
+      ...TixButton.variants, // copy variants from TixButton
+      kind: {
+        primary: tw`bg-red-500 text-white`, // override primary styles
+      },
+    },
+  },
+  TixButton, // default under element as TixButton
+  (styled) => (_props, ref) => {
+    const [El, { initCount, onChangeCount, ...props }] = styled(_props);
+    const [count, setCount] = useState(initCount); // get custom prop value
+
+    useEffect(() => {
+      count && onChangeCount(count);
+    }, [count, onChangeCount]);
+
+    return <El {...props} onClick={() => setCount(count + 1)} />;
+  }
+);
+
+/** 
+ * file: App.tsx
+ */
+import React, { FC } from "react";
+import { TixButtonWithProps } from "./TixButtonWithProps"
+ 
+const App: FC = () => {
+  const handleHelloTix = () => { alert("Hello Tix!"); };
+
+  return (<div>
+    <TixButtonCustomProps
+      kind="primary"
+      initCount={0}
+      onChangeCount={(num) => alert(num)}
+    >
+      CustomProps counting increment
+    </TixButtonCustomProps>
+  </div>)
+}
+```
+**Pylymorphic Component & Refs/useRef**
+
+```NO EXAMPLE BUT SUPPORTED, TODO EXAMPLE```
+
 ## Installation
 `yarn add styled-tix tailwind-merge`
 

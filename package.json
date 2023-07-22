@@ -1,6 +1,6 @@
 {
   "name": "styled-tix",
-  "version": "2.5.9",
+  "version": "2.5.10",
   "description": "Styles your React components with TailwindCSS classes, define variant properties without fighting huge & long classnames.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

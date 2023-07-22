@@ -1,4 +1,11 @@
-import { createElement, forwardRef } from "react";
+import {
+  ElementRef,
+  ElementType,
+  ForwardedRef,
+  RefCallback,
+  createElement,
+  forwardRef,
+} from "react";
 import {
   PolymorphicTixProps,
   Tix,
@@ -115,10 +122,6 @@ const defaultRender: TixRender<any, any> = (styled) => (props, ref) => {
 
 // Helpers
 
-export function withProps<T>(tixInstance: Tix): Tix<T> {
-  return tixInstance as Tix<T>;
-}
-
 export function tw(classes: TemplateStringsArray, ...args: string[]) {
   return (
     Array.from(classes)
@@ -126,4 +129,20 @@ export function tw(classes: TemplateStringsArray, ...args: string[]) {
       .map((c, i) => c + args[i])
       .join("") + classes[classes.length - 1]
   );
+}
+
+export function xrefs<E extends ElementType>(
+  refs: (ForwardedRef<any> | undefined)[]
+): RefCallback<ElementRef<E>> {
+  return (el) => {
+    refs.forEach((ref) => {
+      if (ref) {
+        if (typeof ref === "function") {
+          ref(el);
+        } else {
+          ref.current = el;
+        }
+      }
+    });
+  };
 }

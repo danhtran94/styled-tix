@@ -1,8 +1,10 @@
 import {
   ComponentPropsWithRef,
   ComponentPropsWithoutRef,
+  ElementRef,
   ElementType,
   ForwardRefExoticComponent,
+  ForwardedRef,
   PropsWithChildren,
   ReactElement,
 } from "react";
@@ -57,7 +59,7 @@ export interface TixRender<
     props: CustomProps &
       VariantProps<V> &
       Omit<PolymorphicTixProps<E, CustomProps>, "ref">,
-    ref: PolymorphicRef<E>
+    ref: ForwardedRef<ElementRef<E>>
   ) => ReactElement;
 }
 

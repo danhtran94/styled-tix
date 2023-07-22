@@ -133,9 +133,7 @@ export const TixButtonCustomProps = withProps<CustomProps>(tix)(
 import React, { FC } from "react";
 import { TixButtonWithProps } from "./TixButtonWithProps"
  
-const App: FC = () => {
-  const handleHelloTix = () => { alert("Hello Tix!"); };
-
+const App: FC = () => {  
   return (<div>
     <TixButtonCustomProps
       kind="primary"
@@ -147,9 +145,76 @@ const App: FC = () => {
   </div>)
 }
 ```
-**Pylymorphic Component & Refs/useRef**
+**Polymorphic Component & Refs/useRef**
 
-```NO EXAMPLE BUT SUPPORTED, TODO EXAMPLE```
+**Sample use tix with react-aria**
+```jsx
+/**
+ * file: TixButtonA11Y.tsx
+ */
+import { useRef } from "react";
+
+import { useButton, AriaButtonProps } from "react-aria"; // Import "react-aria"
+
+import { tix, withProps, xrefs, compareAsEl, propsOf } from "./tix";
+import { TixButton } from "./TixButton";
+
+// Declare aria's AriaButtonProps using `withProps` helper
+export const TixButtonA11Y = withProps<AriaButtonProps>(tix)(
+  {
+    name: "TixButtonA11Y",
+    variants: {},
+  },
+  TixButton, // reuse TixButton
+  (styled) => (_props, ref) => {
+    const [El, props] = styled(_props);
+
+    // useButton by react-aria
+    const ariaRef = useRef<HTMLButtonElement | null>(null);
+    const { buttonProps, isPressed } = useButton(props, ariaRef);
+
+    // Polymorpic check 'as' prop value and casts El type
+    const [AsA, refA] = compareAsEl("a", El, ref);
+    // If as = 'a' == true, do something...
+    if (AsA) {
+      console.warn(
+        "This component may not working correct with prop 'as' = 'a'."
+      );
+      return (
+        <AsA ref={refA} {...propsOf("a", props)}>
+          This component may not working with prop 'as' = 'a'.
+        </AsA>
+      );
+    }
+
+    // Return El with combined refs with tix xrefs helper
+    return (
+      <El
+        ref={xrefs<"button">([ref, ariaRef])}
+        {...{ ...props, ...buttonProps }}
+      ></El>
+    );
+  }
+);
+
+
+/** 
+ * file: App.tsx
+ */
+import React, { FC } from "react";
+import { TixButtonWithProps } from "./TixButtonWithProps"
+ 
+const App: FC = () => {
+  const handleHelloTix = () => { alert("Hello Tix!"); };
+
+  return (<div>
+    <TixButtonA11Y kind="primary" onPress={handleHelloTix}>
+      This button use aria's onPress instead onClick
+    </TixButtonA11Y>
+    <TixButtonA11Y as={"a"}></TixButtonA11Y>
+  </div>)
+}
+```
 
 ## Installation
 `yarn add styled-tix tailwind-merge`

@@ -7,6 +7,8 @@
 
 Styles your React components with TailwindCSS classes, and define variant properties without fighting huge & long classnames.
 
+![Tix What](docs/images/what-tix.png)
+
 ## Preview Simple Usecase
 This is simple sample for **`styles button html tag`**. `tix` can do more complex cases than below.
 

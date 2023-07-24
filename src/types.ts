@@ -81,7 +81,7 @@ interface PolymorphicTixComponentWithVariants<
   <C extends ElementType = E>(
     props: CustomProps & VariantProps<V> & PolymorphicTixProps<C, CustomProps>
   ): ReactElement;
-  readonly variants: V;
+  readonly config: TixConfig<V>;
 }
 
 export type PolymorphicRef<C extends ElementType> =

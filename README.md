@@ -108,13 +108,14 @@ interface CustomProps {
 export const TixButtonCustomProps = withProps<CustomProps>(tix)(
   {
     name: "ButtonCustomProps",
-    base: tw`text-base font-bold border rounded inline-flex items-center px-8 py-3 mb-2`,
+    base: TixButton.config.base,
     variants: {
-      ...TixButton.variants, // copy variants from TixButton
+      ...TixButton.config.variants, // copy variants from TixButton
       kind: {
         primary: tw`bg-red-500 text-white`, // override primary styles
       },
     },
+    defaults: TixButton.config.defaults
   },
   TixButton, // default under element as TixButton
   (styled) => (_props, ref) => {

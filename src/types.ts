@@ -5,7 +5,6 @@ import {
   ElementType,
   ForwardRefExoticComponent,
   ForwardedRef,
-  PropsWithChildren,
   ReactElement,
 } from "react";
 
@@ -93,10 +92,8 @@ type AsProp<C extends ElementType> = {
 
 type PropsToOmit<C extends ElementType, P> = keyof (AsProp<C> & P);
 
-type PolymorphicComponentProp<
-  C extends ElementType,
-  Props = {}
-> = PropsWithChildren<Props & AsProp<C>> &
+type PolymorphicComponentProp<C extends ElementType, Props = {}> = Props &
+  AsProp<C> &
   Omit<ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
 
 type PolymorphicComponentPropWithRef<

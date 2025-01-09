@@ -57,10 +57,11 @@ export const newTix = (classesMixer: (classes: string[]) => string): Tix => {
       ] as any;
     };
 
-    const RefComponent = forwardRef(render(styled));
+    const RefComponent = forwardRef(render(styled)) as any;
     RefComponent.displayName = tixComponentName;
+    RefComponent.config = config;
 
-    return { ...RefComponent, config } as any;
+    return RefComponent;
   };
 };
 

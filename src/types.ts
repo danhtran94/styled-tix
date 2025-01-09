@@ -105,3 +105,5 @@ export type PolymorphicTixProps<
   C extends ElementType,
   CustomProps = {}
 > = PolymorphicComponentPropWithRef<C, { className?: string } & CustomProps>;
+
+export type PropsOverrides<T, U> = Omit<T, keyof U> & U;

@@ -219,6 +219,60 @@ const App: FC = () => {
 }
 ```
 
+**Sample use tix to define generic items type & overrides props**
+```jsx
+import React from "react";
+import * as nui from "@nextui-org/react";
+
+import { tix, tw, withProps, xrefs, PolymorphicTixProps, PropsOverrides } from "@/libs/tix";
+import { Overrides } from "@/libs/types";
+
+interface Item {
+  id: number;
+  text: string;
+}
+
+export interface AutocompleteProps<T extends Item = any> {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+  children?: never;
+}
+
+const AutocompleteInner = withProps<AutocompleteProps<Item>>(tix)(
+  {
+    name: "Autocomplete",
+    base: tw`rounded-2xl bg-white font-inter`,
+    variants: {},
+  },
+  nui.Autocomplete,
+  (styled) => (props, ref) => {
+    const [, { items, renderItem, ...rest }] = styled(props);
+
+    return (
+      <nui.Autocomplete variant="bordered" {...rest} ref={xrefs([ref])}>
+        {items.map((item) => (
+          <nui.AutocompleteItem
+            className="min-h-4 min-w-4 font-inter"
+            key={item.id}
+            value={item.id}
+            textValue={item.text}
+          >
+            {renderItem(item)}
+          </nui.AutocompleteItem>
+        ))}
+      </nui.Autocomplete>
+    );
+  }
+);
+
+export const Autocomplete: <T extends Item>(
+  props: PropsOverrides<
+    PolymorphicTixProps<typeof AutocompleteInner>,
+    AutocompleteProps<T>
+  >
+) => ReturnType<typeof AutocompleteInner> = AutocompleteInner;
+```
+
 ## Installation
 `yarn add styled-tix tailwind-merge`
 
@@ -254,3 +308,7 @@ Add this line to your VSCode config settings, open by pressing <kbd>⌘</kbd> + 
 ]
 ```
 ![VSCode support image](docs/images/vscode-tailwind-intellisense.png)
+
+## References
+// https://stackoverflow.com/questions/58469229/react-with-typescript-generics-while-using-react-forwardref/58473012
+// https://www.tsteele.dev/posts/react-polymorphic-forwardref
